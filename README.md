@@ -2,9 +2,25 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20%7C%20windows-lightgrey)](https://github.com/yourusername/ridwalk)
+[![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20%7C%20windows-lightgrey)](https://github.com/wither/ridwalk)
+[![Stars](https://img.shields.io/github/stars/wither/ridwalk.svg?style=flat&color=brightgreen)](https://github.com/wither/ridwalk/stargazers)
+[![Issues](https://img.shields.io/github/issues/wither/ridwalk.svg?style=flat&color=red)](https://github.com/wither/ridwalk/issues)
 
-SMB user and group enumeration via RID cycling. Supports Windows Active Directory and Unix/Linux Samba environments.
+![screenshot.png](./screenshot.png)
+
+A fast RID cycling tool for SMB enumeration on Windows AD and Unix/Linux Samba 
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Command Line Options](#command-line-options)
+- [Sample Output](#sample-output)
+- [Troubleshooting](#troubleshooting)
+- [Roadmap](#roadmap)
+- [Technical Notes](#technical-notes)
+- [Disclaimer](#disclaimer)
 
 ## Features
 
@@ -12,30 +28,39 @@ SMB user and group enumeration via RID cycling. Supports Windows Active Director
 - Automatic target detection (Windows AD / Unix Samba)
 - Multi-threaded scanning with configurable thread count
 - Anonymous and authenticated enumeration modes
-- Comprehensive input validation and error handling
 
 ## Installation
 
-Requires `rpcclient` from the Samba suite:
+### Prerequisites
 
-```bash
-# Ubuntu/Debian
-sudo apt install smbclient
+- Python 3.8 or higher
+- Samba tools (`rpcclient`)
+- Network access to target SMB services
 
-# macOS
-brew install samba
+### Install Dependencies
 
-# Windows (WSL)
-sudo apt install smbclient
-```
+1. **Install Samba tools**
+   ```bash
+   # Ubuntu/Debian
+   sudo apt install smbclient
+   
+   # macOS
+   brew install samba
+   
+   # Windows (WSL)
+   sudo apt install smbclient
+   ```
 
-Then clone and setup ridwalk:
+2. **Clone the repository**
+   ```bash
+   git clone https://github.com/wither/ridwalk.git
+   cd ridwalk
+   ```
 
-```bash
-git clone https://github.com/yourusername/ridwalk.git
-cd ridwalk
-chmod +x ridwalk.py
-```
+3. **Set permissions**
+   ```bash
+   chmod +x ridwalk.py
+   ```
 
 ## Usage
 
@@ -100,14 +125,25 @@ RID    Type   Name
 
 ## Troubleshooting
 
-**"rpcclient not found"**
+**"rpcclient not found"**  
 Install samba tools: `sudo apt install smbclient`
 
-**"Connection refused"**
+**"Connection refused"**  
 Verify SMB service is running and accessible
 
-**"Authentication failed"**
+**"Authentication failed"**  
 Check credentials or try anonymous mode
+
+## Roadmap
+
+- [ ] **Multiple export formats**
+- [ ] **Proxy support**
+- [ ] **Configuration files**
+- [ ] **CIDR scanning**
+- [ ] **Stealth options**
+- [ ] **Username validation**
+
+See the [open issues](https://github.com/wither/ridwalk/issues) for a full list of proposed features and known issues.
 
 ## Technical Notes
 
@@ -116,10 +152,8 @@ Check credentials or try anonymous mode
 - High thread counts may trigger rate limiting or detection mechanisms
 - Tool performance varies based on network latency and target responsiveness
 
-## RID Cycling Overview
+## Disclaimer
 
-RID (Relative Identifier) cycling leverages the sequential nature of Windows security identifiers to enumerate domain objects. This technique queries ranges of RIDs to discover user and group accounts that may not be accessible through other enumeration methods.
+**This tool is intended for authorized security testing and penetration testing only.**
 
----
-
-**Intended for authorized security testing only. Obtain proper authorization before use.**
+Users must obtain explicit written permission before scanning any systems. The authors assume no liability for misuse of this software. Use responsibly and in compliance with all applicable laws and regulations.
